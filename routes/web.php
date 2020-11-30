@@ -13,4 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [ResourceController::class, 'index']);
+Route::get('/resource', [ResourceController::class, 'formResource']);
 Route::post('/resource', [ResourceController::class, 'store']);
+Route::get('/category/{id}', [ResourceController::class, 'detailCategory']);
