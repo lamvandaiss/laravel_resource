@@ -7,6 +7,7 @@
         <meta name="author" content="">
         <title> @yield('title')</title>
         <link href="{{ asset('/css/main.css') }}" rel="stylesheet">
+        <script src="{{ asset('/js/jquery.min.js') }}"></script>
     </head>
     <body>
         @include("layouts.elements.sidebar")

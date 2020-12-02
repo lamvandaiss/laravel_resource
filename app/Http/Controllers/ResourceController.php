@@ -33,4 +33,11 @@ class ResourceController extends Controller
         $resources = Resource::where('category_id', $category_id)->get();
         return view('category', ['resources' => $resources]);
     }
+
+    // Search resources by task
+    public function searchByTask(Request $request) {
+        $searchTxt = $request->searchTxt;
+        $resources = Resource::where('task', 'like', "%$searchTxt%")->get();
+        return $resources;
+    }
 }
