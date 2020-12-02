@@ -75,3 +75,8 @@ body {font-family: "Lato", sans-serif;}
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+.img_clipboard{
+  display: none;
+  max-width: 300px;
+  height: auto;
+}

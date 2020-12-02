@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +18,4 @@ Route::get('/resource', [ResourceController::class, 'formResource']);
 Route::post('/resource', [ResourceController::class, 'store']);
 Route::get('/category/{id}', [ResourceController::class, 'detailCategory']);
 Route::get('/search', [ResourceController::class, 'searchByTask']);
+Route::post('/file/resource', [FileController::class, 'singleUpload']);

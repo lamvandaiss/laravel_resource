@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('content')
+    @if(isset($resource))
     <form action="/resource" method="POST">
         @csrf
         <label for="">Html:</label><br>
@@ -9,4 +10,5 @@
         <label for="">Task:</label><br>
         <textarea name="task" rows="4" cols="50">{{$resource->task}}</textarea><br>
     </form>      
+    @endif
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Resource;
+use App\Services\Upload;
 
 class ResourceController extends Controller
 {
@@ -19,9 +20,22 @@ class ResourceController extends Controller
     }
 
     public function store(Request $request) {
+        $images = array();
+        $files = $request->file('images');
+        if(isset($files)) {
+            $upload = new Upload;
+            foreach($files as $file) {
+                $fileUploaded = $upload->singleUpload($file);
+                $images[] = $fileUploaded['url'];
+            }
+        }
+        if(trim($request->image_clipboard) != '') {
+            $images[] = $request->image_clipboard;
+        }
     	$resource = new Resource;
         $resource->html = $request->html;
-        $resource->sass = $request->sass;
+        $resource->sass = $request->sass;        
+        $resource->images = implode("|",$images);
         $resource->task = $request->task;
         $resource->category_id = $request->category;
         $resource->save();
