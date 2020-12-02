@@ -57,6 +57,8 @@
     }
     // upload image by ajax
     function uploadFile(file) {
+      $("#img_clipboard").attr('src', URL.createObjectURL(file));
+      $("#img_clipboard").show();
       var formData = new FormData();
       formData.append('file', file);
       var token = $('meta[name="csrf-token"]').attr('content');
@@ -69,8 +71,6 @@
         success:function(result){ 
           var linkImg = result.url;
           $("#image_clipboard").val(linkImg);
-          $("#img_clipboard").attr('src', linkImg);
-          $("#img_clipboard").show();
         }
       });
     }
