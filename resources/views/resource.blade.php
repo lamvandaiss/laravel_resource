@@ -11,9 +11,11 @@
       <textarea name="sass" rows="4" cols="50"></textarea>
     </div>
     <div class="item-form">
-      <label for="">Images:</label><br>
-      <input type="file" name="images[]" id="images" placeholder="Images" multiple  accept="image/*">
-      <span id="pasteTarget" class="pasteTarget">Click and paste here.</span>
+      <div class="set-image">
+        <label for="">Images:</label><br>
+        <input type="file" name="images[]" id="images" placeholder="Images" multiple  accept="image/*">
+        <span id="pasteTarget" class="pasteTarget">Click and paste here.</span>
+      </div>
       <div id="image_preview" class="image_preview"></div>
       <div>
         <input type="hidden" id="image_clipboard" name="image_clipboard" value="">
@@ -50,8 +52,6 @@
         var item = e.clipboardData.items[i];
         if (item.type.indexOf("image" - 1)) {
           uploadFile(item.getAsFile());
-        } else {
-          console.log("Discardingimage paste data");
         }
       }
     }
@@ -67,7 +67,6 @@
         contentType: false, 
         processData: false,
         success:function(result){ 
-          console.log(result.url);
           var linkImg = result.url;
           $("#image_clipboard").val(linkImg);
           $("#img_clipboard").attr('src', linkImg);
