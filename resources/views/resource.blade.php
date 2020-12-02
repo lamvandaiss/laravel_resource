@@ -2,27 +2,36 @@
 @section('content')
   <form action="/resource" method="POST" enctype="multipart/form-data">
     @csrf
-    <label for="">Html:</label><br>
-    <textarea name="html" rows="4" cols="50"></textarea><br>
-    <label for="">Sass:</label><br>
-    <textarea name="sass" rows="4" cols="50"></textarea><br>
-    <label for="">Images:</label><br>
-    <input type="file" name="images[]" id="images" placeholder="Images" multiple><br>
-    <div id="image_preview"></div>
-    <div style="width: 200px; height: 200px; background: grey" id="pasteTarget">
-      Click and paste here.
+    <div class="item-form">
+      <label for="">Html:</label><br>
+      <textarea name="html" rows="4" cols="50"></textarea>
     </div>
-    <input type="hidden" id="image_clipboard" name="image_clipboard" value="">
-    <img src="#" alt="image" class="img_clipboard" id="img_clipboard">
-
-    <label for="">Task:</label><br>
-    <textarea name="task" rows="4" cols="50"></textarea><br>
-    <label for="">Category:</label><br>
-    <select name="category">
-      @foreach ($categories as $category)
-          <option value="{{ $category->id }}">{{ $category->name }}</option>
-      @endforeach
-    </select><br> <br>     
+    <div class="item-form">
+      <label for="">Sass:</label><br>
+      <textarea name="sass" rows="4" cols="50"></textarea>
+    </div>
+    <div class="item-form">
+      <label for="">Images:</label><br>
+      <input type="file" name="images[]" id="images" placeholder="Images" multiple  accept="image/*">
+      <span id="pasteTarget" class="pasteTarget">Click and paste here.</span>
+      <div id="image_preview" class="image_preview"></div>
+      <div>
+        <input type="hidden" id="image_clipboard" name="image_clipboard" value="">
+        <img src="#" alt="image" class="img_clipboard" id="img_clipboard">
+      </div>
+    </div>
+    <div class="item-form">
+      <label for="">Task:</label><br>
+      <textarea name="task" rows="4" cols="50"></textarea>
+    </div>
+    <div class="item-form">
+      <label for="">Category:</label><br>
+      <select name="category">
+        @foreach ($categories as $category)
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
+        @endforeach
+      </select>
+    </div>     
     <input type="submit" value="Create">
   </form> 
   <script>
