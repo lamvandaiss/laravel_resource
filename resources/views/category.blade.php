@@ -1,41 +1,39 @@
 @extends('layouts.master')
 @section('content')
     <div class="box-search">
-        <input type="text" value="" id="input-search">
-        <button id="btn-search">Tìm kiếm</button>
+        <input type="text" value="" id="input-search" class="form-control">
+        <button id="btn-search" class="btn btn-secondary">Tìm kiếm</button>
     </div>
     <div class="loader"></div>
     <div class="div-content" id="div-content">
-    @foreach ($resources as $resource)
-        <form>
-            <div class="item-form">
-                <label for="">Html:</label><br>
-                <textarea name="html" rows="4" cols="50">{{$resource->html}}</textarea>
-            </div>
-            <div class="item-form">
-                <label for="">Sass:</label><br>
-                <textarea name="sass" rows="4" cols="50">{{$resource->sass}}</textarea>
-            </div>
-            @if($resource->images)
-            <div class="item-form">
-                <label for="">Images:</label><br>
-                <div class="image_preview">
-                    <?php 
-                        $images = explode('|', $resource->images);
-                    ?>
-                    @foreach($images as $image)
-                        <img src='{{$image}}' alt="image"><br>
-                    @endforeach
-                </div>
-            </div>
-            @endif
-            <div class="item-form">
-                <label for="">Task:</label><br>
-                <textarea name="task" rows="4" cols="50">{{$resource->task}}</textarea>
-            </div>
-        </form> 
-        <hr>
-    @endforeach
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tag</th>
+                    <th>Image</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $stt = 1; ?>
+                @foreach ($resources as $resource)
+                <tr>
+                    <td>{{$stt++}}</td>
+                    <td><a href="/detail-resource/{{$resource->id}}">{{$resource->tag}}</a></td>
+                    <td>
+                    @if($resource->images)
+                        <?php 
+                            $images = explode('|', $resource->images);
+                        ?>
+                        <img class="cate-image" src='{{$images[0]}}' alt="image">
+                    @endif
+                    </td>
+                    <td>{{$resource->category->name}}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
     <script>
         $(function() {
@@ -49,36 +47,34 @@
                 }).done(function( result ) {
                     $(".loader").hide();
                     var html = "";
+                    html += '<table class="table table-bordered">';
+                    html += '    <thead>';
+                    html += '        <tr>';
+                    html += '            <th>STT</th>';
+                    html += '            <th>Tag</th>';
+                    html += '            <th>Image</th>';
+                    html += '            <th>Category</th>';
+                    html += '        </tr>';
+                    html += '    </thead>';
+                    html += '    <tbody>';
+                    let stt = 1;
+                    for (var item of result) {
+                        html += '        <tr>';
+                        html += '            <td>' + stt++ + '</td>';
+                        html += '            <td><a href="/detail-resource/' + item.id + '">' + item.tag + '</a></td>';
+                        html += '            <td>';
+                        if(item.images){
+                            let images = item.images.split('|');
+                            html += '             <img class="cate-image" src=' + images[0] + ' alt="image">';
+                        }
+                        html += '            </td>';
+                        html += '            <td>' + item.category.name + '</td>';
+                        html += '        </tr>';
+                    }
+                    html += '    </tbody>';
+                    html += '</table>';
                     if(result.length == 0) {
                         html = "Không tìm thấy kết quả nào!";    
-                    }
-                    for (var item of result) {
-                        html += '<form>';
-                        html += '<div class="item-form">';
-                        html += '<label for="">Html:</label><br>';
-                        html += '<textarea name="html" rows="4" cols="50">'+ item.html +'</textarea>';
-                        html += '</div>'; 
-                        html += '<div class="item-form">';
-                        html += '<label for="">Sass:</label><br>';
-                        html += '<textarea name="sass" rows="4" cols="50">'+ item.sass +'</textarea>';
-                        html += '</div>'; 
-                        if(item.images){
-                            let images = item.images.split("|");
-                            html += '<div class="item-form">';
-                            html += '    <label for="">Images:</label><br>';
-                            html += '    <div class="image_preview">';
-                            for(var image of images) {
-                                html += '      <img src="' + image + '" alt="image">';
-                            }
-                            html += '    </div>';
-                            html += '</div>';
-                        }
-                        html += '<div class="item-form">';
-                        html += '<label for="">Task:</label><br>';
-                        html += '<textarea name="task" rows="4" cols="50">'+ item.task +'</textarea>';
-                        html += '</div>'; 
-                        html += '</form>'; 
-                        html += '<hr>';
                     }
                     $("#div-content").html(html);
                 });

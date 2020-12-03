@@ -15,9 +15,9 @@ class CreateResourcesTable extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
+            $table->longText('tag')->nullable();
             $table->longText('html')->nullable();
             $table->longText('sass')->nullable();
-            $table->longText('task')->nullable();
             $table->string('images')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');

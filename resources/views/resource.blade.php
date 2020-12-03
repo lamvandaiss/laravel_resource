@@ -2,15 +2,11 @@
 @section('content')
   <form action="/resource" method="POST" enctype="multipart/form-data">
     @csrf
-    <div class="item-form">
-      <label for="">Html:</label><br>
-      <textarea name="html" rows="4" cols="50"></textarea>
+    <div class="form-group">
+      <label for="">Tag:</label>
+      <input type="text" class="form-control" name="tag">
     </div>
-    <div class="item-form">
-      <label for="">Sass:</label><br>
-      <textarea name="sass" rows="4" cols="50"></textarea>
-    </div>
-    <div class="item-form">
+    <div class="form-group">
       <div class="set-image">
         <label for="">Images:</label><br>
         <input type="file" name="images[]" id="images" placeholder="Images" multiple  accept="image/*">
@@ -22,19 +18,28 @@
         <img src="#" alt="image" class="img_clipboard" id="img_clipboard">
       </div>
     </div>
-    <div class="item-form">
-      <label for="">Task:</label><br>
-      <textarea name="task" rows="4" cols="50"></textarea>
+    <div class="row">    
+      <div class="item-form col-6 form-group">
+        <label for="">Html:</label>
+        <textarea name="html" class="form-control" rows="4" cols="50"></textarea>
+      </div>
+      <div class="item-form col-6 form-group">
+        <label for="">Sass:</label>
+        <textarea name="sass" class="form-control" rows="4" cols="50"></textarea>
+      </div>
     </div>
-    <div class="item-form">
-      <label for="">Category:</label><br>
-      <select name="category">
+    <div class="form-group">
+      <label for="">Category:</label>
+      <select name="category" class="form-control">
         @foreach ($categories as $category)
             <option value="{{ $category->id }}">{{ $category->name }}</option>
         @endforeach
       </select>
-    </div>     
-    <input type="submit" value="Create">
+    </div>  
+    <div class="form-group div-submit">   
+      <input type="submit" value="Tạo mới" class="btn btn-secondary">
+      <input type="reset" value="Đặt lại" class="btn btn-secondary">
+    </div> 
   </form> 
   <script>
   $(function() {
