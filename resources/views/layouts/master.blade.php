@@ -16,7 +16,10 @@
         @include("layouts.elements.sidebar")
         <div class="main">
             <div class="dv-new"><button Class="btn btn-secondary"><a href="/resource" class="new-res">Thêm mới Resource</a></button></div>
-            @yield('content')
+            <div class="container">
+                @yield('content')
+            </div>
         </div>
+        <script src="{{ asset('/js/main.js') }}"></script>
     </body>
 </html>

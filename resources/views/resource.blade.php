@@ -3,8 +3,8 @@
   <form action="/resource" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
-      <label for="">Tag:</label>
-      <input type="text" class="form-control" name="tag">
+      <label for="">Tag:<span class="required-item">*</span></label>
+      <input type="text" required class="form-control" name="tag">
     </div>
     <div class="form-group">
       <div class="set-image">
@@ -20,12 +20,12 @@
     </div>
     <div class="row">    
       <div class="item-form col-6 form-group">
-        <label for="">Html:</label>
-        <textarea name="html" class="form-control" rows="4" cols="50"></textarea>
+        <label for="">Html:<span class="required-item">*</span></label>
+        <textarea name="html" required class="form-control" rows="4" cols="50"></textarea>
       </div>
       <div class="item-form col-6 form-group">
-        <label for="">Sass:</label>
-        <textarea name="sass" class="form-control" rows="4" cols="50"></textarea>
+        <label for="">Sass:<span class="required-item">*</span></label>
+        <textarea name="sass" required class="form-control" rows="4" cols="50"></textarea>
       </div>
     </div>
     <div class="form-group">

@@ -1,6 +1,5 @@
 <div class="sidebar">
-    <div><a href="/"  class="cate">Home</a></div>
-    <div class="cate">Category</div>
+    <div class="cate"><a href="/">Category</a></div>
     @foreach ($categories as $category)
         <a href="/category/{{ $category->id }}">{{ $category->name }}</a>
     @endforeach
